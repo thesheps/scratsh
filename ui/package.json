@@ -18,7 +18,7 @@
     "clean": "rimraf ./dist tsconfig.build.tsbuildinfo",
     "start": "webpack-dev-server --mode development --open --hot",
     "test": "jest",
-    "webpack": "webpack --mode production"
+    "build": "webpack --mode production"
   },
   "dependencies": {
     "@types/react-dom": "^16.9.8",
