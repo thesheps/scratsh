@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App Matches snapshot 1`] = `
+<div>
+  <div
+    class="StyledGrommet-sc-19lkkz7-0 kPhklg"
+  >
+    <header
+      class="StyledBox-sc-13pk1d4-0 lkqXsm"
+    >
+      <div
+        class="StyledBox-sc-13pk1d4-0 bIdaiR"
+      >
+        <h1
+          class="StyledHeading-sc-1rdh4aw-0 bGlFVF"
+        >
+          scratSH
+        </h1>
+      </div>
+    </header>
+  </div>
+</div>
+`;

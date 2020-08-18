@@ -9,15 +9,16 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Install and Build 🔧
+      - name: UI - Test & Build 🔧
         run: |
           cd ui
           npm install
+          npm run test
           npm run build
 
-      - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@3.5.9
-        with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH: gh_pages
-          FOLDER: ui/dist
+      - name: Infra - Test & Deploy 🚀
+        run: |
+          cd infra
+          npm install
+          npm run test
+          npm run deploy
