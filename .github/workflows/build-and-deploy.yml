@@ -24,4 +24,4 @@ jobs:
           cd infra
           npm install
           npm run test
-          npm run deploy
+          npm run deploy:ci

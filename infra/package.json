@@ -8,7 +8,8 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "deploy": "cdk deploy"
+    "deploy": "cdk deploy",
+    "deploy:ci": "cdk deploy --require-approval=never"
   },
   "devDependencies": {
     "@types/jest": "^26.0.10",
