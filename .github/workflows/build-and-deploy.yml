@@ -60,5 +60,5 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: |
-          aws s3 sync --delete dist s3://scratsh-dev
+          aws s3 sync --delete ui/dist s3://scratsh-dev
          
