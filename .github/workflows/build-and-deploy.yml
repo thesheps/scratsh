@@ -14,7 +14,7 @@ jobs:
           npm install
           npm run test
 
-      - name: Upload Artifact 📁
+      - name: Upload Dependencies 📁
         uses: actions/upload-artifact@v2
         with:
           name: ui-modules
@@ -36,7 +36,7 @@ jobs:
           npm install
           npm run test
       
-      - name: Upload Artifact 📁
+      - name: Upload Dependencies 📁
         uses: actions/upload-artifact@v2
         with:
           name: infra-modules
@@ -50,7 +50,7 @@ jobs:
       - name: Checkout 🛒
         uses: actions/checkout@v2.3.1
 
-      - name: Download Artifact 📁
+      - name: Download Dependencies 📁
         uses: actions/download-artifact@v2
         with:
           name: ui-modules
@@ -75,13 +75,13 @@ jobs:
       - name: Checkout 🛒
         uses: actions/checkout@v2.3.1
 
-      - name: Download Artifact 📁
+      - name: Download Dependencies 📁
         uses: actions/download-artifact@v2
         with:
           name: infra-modules
           path: infra/node_modules
 
-      - name: Download Artifact 📁
+      - name: Download UI Artifact 📁
         uses: actions/download-artifact@v2
         with:
           name: dist
