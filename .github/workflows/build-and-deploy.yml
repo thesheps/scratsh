@@ -1,55 +1,20 @@
 name: Build and Deploy
 on: [push]
 jobs:
-  test-ui:
+  build:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout 🛒
         uses: actions/checkout@v2.3.1
 
-      - name: Run Tests 🧪
+      - name: Test & Build 🚀
         run: |
           cd ui
           npm install
           npm run test
-
-      - name: Upload Dependencies 📁
-        uses: actions/upload-artifact@v2
-        with:
-          name: ui-modules
-          path: ui/node_modules
-
-  test-infra:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout 🛒
-        uses: actions/checkout@v2.3.1
-
-      - name: Run Tests 🧪
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        run: |
-          cd infra
-          npm install
-          npm run test
-
-  build-ui:
-    runs-on: ubuntu-latest
-    needs: [test-ui, test-infra]
-
-    steps:
-      - name: Checkout 🛒
-        uses: actions/checkout@v2.3.1
-
-      - name: Build 🏗️
-        run: |
-          cd ui
-          npm install
           npm run build
-      
+
       - name: Upload Artifact 📁
         uses: actions/upload-artifact@v2
         with:
@@ -57,25 +22,21 @@ jobs:
           path: ui/dist
 
   deploy:
-    needs: build-ui
     runs-on: ubuntu-latest
+    needs: build
 
     steps:
       - name: Checkout 🛒
         uses: actions/checkout@v2.3.1
 
-      - name: Download UI Artifact 📁
-        uses: actions/download-artifact@v2
-        with:
-          name: dist
-
-      - name: Deploy Infra 🚀
+      - name: Test & Deploy Infra 🚀
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: |
           cd infra
           npm install
+          npm run test
           npm run deploy:ci
 
       - name: Deploy UI 🚀
@@ -84,4 +45,3 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: |
           aws s3 sync --delete ui/dist s3://scratsh-dev
-         
