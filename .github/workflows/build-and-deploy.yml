@@ -8,11 +8,13 @@ jobs:
       - name: Checkout 🛒
         uses: actions/checkout@v2.3.1
 
-      - name: Test & Build 🚀
+      - name: Test 🧪
         run: |
           cd ui
           npm install
           npm run test
+
+      - name: Build 🏗️
           npm run build
 
       - name: Upload Artifact 📁
@@ -29,13 +31,7 @@ jobs:
       - name: Checkout 🛒
         uses: actions/checkout@v2.3.1
 
-      - name: Download Artifact 📁
-        uses: actions/download-artifact@v2
-        with:
-          name: dist
-          path: ui/dist
-
-      - name: Test & Deploy Infra 🚀
+      - name: Test Infra 🧪
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -43,7 +39,20 @@ jobs:
           cd infra
           npm install
           npm run test
+
+      - name: Deploy Infra 🚀
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        run: |
+          cd infra
           npm run deploy:ci
+
+      - name: Download Artifact 📁
+        uses: actions/download-artifact@v2
+        with:
+          name: dist
+          path: ui/dist
 
       - name: Deploy UI 🚀
         env:
